@@ -1,7 +1,16 @@
-function Square({value}) {
+import { useState } from "react";
+
+function Square() {
+  const [value, setValue] = useState(null);
+  function handleClicked() {
+   setValue('x')
+  }
   return (
     <>
-      <button className="bg-white border border-gray-400 h-12 w-12 m-1">
+      <button
+        onClick={handleClicked}
+        className="bg-white border border-gray-400 h-12 w-12 m-1"
+      >
         {value}
       </button>
     </>
@@ -9,22 +18,24 @@ function Square({value}) {
 }
 
 function App() {
+  const [squares,setSquares]=useState(Array(9).fill(null))
   return (
     <>
-      <div>
-        <Square value='1' />
-        <Square value='2'/>
-        <Square value='3'/>
+      <div className="flex">
+        <Square value={squares[0]}/>
+
+        <Square value={squares[1]} />
+        <Square value={squares[2]}/>
       </div>
-      <div>
-        <Square value='4' />
-        <Square value='5'/>
-        <Square value='6'/>
+      <div className="flex">
+        <Square value={squares[3]} />
+        <Square value={squares[4]}/>
+        <Square value={squares[5]}/>
       </div>
-      <div>
-        <Square value='7'/>
-        <Square value='8'/>
-        <Square value='9'/>
+      <div className="flex">
+        <Square value={square[6]}/>
+        <Square value={squares[7]}/>
+        <Square value={squares[8]}/>
       </div>
     </>
   );
