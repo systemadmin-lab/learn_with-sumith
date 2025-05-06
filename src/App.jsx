@@ -17,6 +17,14 @@ function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   //for making decssion which will be priint x||0
   const [xIsNext, setIsNext] = useState(true);
+  //lets chheck the winner here
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = `Winner is - ${winner}`;
+  } else {
+    status = "moves for " + (xIsNext ? "X" : "O");
+  }
 
   //we will send this button as  props to our child component
   function handleClicked(index) {
@@ -35,6 +43,9 @@ function App() {
   }
   return (
     <>
+      <div className="text-xl text-black font-extrabold">
+        <h1>{status}</h1>
+      </div>
       <div className="flex">
         <Square value={squares[0]} onSquareClick={() => handleClicked(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClicked(1)} />
@@ -53,9 +64,9 @@ function App() {
     </>
   );
 }
-// hhere we ar writing a function for checking winner 
+// hhere we ar writing a function for checking winner
 function calculateWinner(squares) {
-  //mark up cordinates 
+  //mark up cordinates
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -66,14 +77,15 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for(let i=0;i<lines.length;i++){
-    const[a,b,c] =lines[i];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
     //logics for checking winner
-    if(squares[a] && squares [a] === squares[b] && squares[a] === squares[c]){
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
-    }else{
-      return null
-    }
+    } 
   }
+  
+    return null;
+  
 }
 export default App;
